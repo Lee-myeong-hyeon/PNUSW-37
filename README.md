@@ -1,249 +1,151 @@
-# Template for Study Group
-이 레파지토리는 참여자들이 학습공동체 결과물을 위한 레파지토리 생성시에 참고할 내용들을 담고 있습니다.
-1. 레파지토리 생성
-2. 레파지토리 구성
-3. README.md 가이드라인
-4. README.md 작성팁
-<br/>
+# OPIc 모의고사 플랫폼
 
+## 1. 프로젝트 소개
 
-## 1. 레파지토리 생성
+### 1.1. 개발배경 및 필요성
+OPIc(Oral Proficiency Interview – computer)은 실제 상황 기반 영어 말하기 능력을 평가하는 시험으로, 응시자 맞춤형 질문이 제시됩니다.  
+하지만 실제 OPIc 시험을 준비하려면 비용이 발생하고, 기출문제 접근성도 낮으며, 연습 환경이 실제 시험과 다소 차이가 있습니다.  
+이에 따라 **실제 시험과 동일한 환경에서 연습 가능한 웹 기반 OPIc 모의고사 플랫폼**을 개발하여, 누구나 무료로 자신의 말하기 실력을 점검할 수 있도록 하고자 합니다.
 
-- https://classroom.github.com/a/wUrpZB4m
-- 위 Github Classroom 링크에 접속해 본인 조의 github 레파지토리를 생성하세요.
-  <img src="https://github.com/user-attachments/assets/d82da173-34a9-4adf-82e6-b712c59ecc70" width="600px" alt="classroom에서 팀 생성 그림"/>
-- 레파지토리 생성 시 팀 이름은 `{조번호}` 형식으로 생성하세요.
-- 예를 들어, 3조의 팀명은 `03` 입니다.
-- 이 경우 `PNUSW-03`이라는 이름으로 레포지토리가 생성됩니다.
-- 팀원의 경우 생성되어 있는 팀에 참가해주세요. <br/>
-  팀에 참가하지 않았을 경우, 레포지토리에 대한 권한이 없어 PR 및 commit이 막힐 수 있습니다.
-  <img src="https://github.com/user-attachments/assets/e1eece39-9d07-485a-aadf-74479ee85d90" width="600px" alt="classroom에서 팀 참여 그림"/>
-<br/>
+### 1.2. 개발 목표 및 주요 내용
+- **목표**: 사용자의 설문조사(Background Survey) 결과를 기반으로 맞춤형 15문제 모의고사를 제공하고, 실제 시험과 유사한 UI/UX 환경에서 녹음·연습을 가능하게 하는 플랫폼 구축
+- **주요 내용**:  
+  1. 단계별 설문조사(사용자 배경, 경험, 선호 주제 등) → 맞춤형 문제 추출 알고리즘  
+  2. 실제 OPIc 시험 환경 재현(문제 표시, 음성 출력, 자동 녹음, 제한 시간)  
+  3. 문제은행(엑셀 기반) 및 AI 활용 동적 문제 생성 기능  
+  4. 향후 TTS(Text-to-Speech) 적용으로 질문 자동 낭독
 
+### 1.3. 세부내용
+- **프론트엔드**: React 기반, Tailwind CSS로 UI 스타일링  
+- **설문조사 페이지**: 총 4개 파트, 한 페이지 내 스크롤 진행 방식, 다중 선택 가능  
+- **문제 추출 알고리즘**: 설문 응답 데이터를 기반으로 엑셀 문제은행에서 맞춤형 15문제 선별  
+- **녹음 페이지**: 문제별 자동 음성 재생 → 준비 시간 30초 → 녹음 60초, 수동/자동 종료 및 다음 문제 이동 가능  
+- **데이터 관리**: 문제은행은 Excel/CSV로 관리, 추출 결과는 JSON 형태로 전달  
+- **향후 확장**: 로그인, 결과 저장, 발음 분석, AI 피드백 기능
 
-## 2. 레파지토리 구성
-- 레파지토리 내에 `README.md` 파일 생성하고 아래의 가이드라인과 작성팁을 참고하여 파일을 작성하세요.
-- 레파지토리 내에 `docs` 폴더를 생성하고 폴더 내에는 과제 수행 하면서 작성한 각종 보고서, 발표자료를 올려둡니다.
-- 그 밖에 레파지토리의 폴더 구성은 과제 결과물에 따라 자유롭게 구성하되 가급적 코드의 목적이나 기능에 따라 폴더를 나누어 구성하세요.  
-<br/>
+### 1.4. 기존 서비스 대비 차별성
+- 무료 이용 가능하며 실제 OPIc 시험 UI/UX를 완벽히 재현  
+- 설문조사 기반 맞춤형 문제 출제  
+- 문제은행 확장성: 엑셀 기반 관리 + AI 자동 문제 생성 가능  
+- TTS 적용으로 시험 진행자의 역할 자동화
 
+### 1.5. 사회적가치 도입 계획
+- 영어 학습 기회가 제한된 학생·취준생에게 무료 실전 연습 환경 제공  
+- 지역/소득 격차로 인한 영어 시험 준비 기회 불평등 완화  
+- 공교육·지역 교육기관과 협업하여 교육 자료로 활용
 
-## 3. README.md 가이드라인
-- README 파일 작성시에 아래의 5가지 항목의 내용은 필수적으로 포함해야 합니다.
-- 아래의 7가지 항목이외에 프로젝트의 이해를 돕기위한 내용을 추가해도 됩니다.
-- `SAMPLE_README.md`가 단순한 형태의 예제이니 참고하세요.
-```markdown
-### 1. 프로젝트 소개
-#### 1.1. 개발배경 및 필요성
-> 프로젝트를 실행하게 된 배경 및 필요성을 작성하세요.
+---
 
-#### 1.2. 개발 목표 및 주요 내용
-> 프로젝트의 목표 및 주요 내용을 작성하세요.
+## 2. 상세설계
 
-#### 1.3. 세부내용
-> 위 내용을 작성하세요.
+### 2.1. 시스템 구성도
+(시스템 구성도 예시 — 프론트엔드, 백엔드, 데이터베이스, 파일 저장소, TTS API 구조)  
+- React(Tailwind) → API 서버(Node.js 예정) → 문제은행(Excel/CSV) → 오디오 저장(브라우저/서버)  
+- TTS API 연동(향후)  
 
-#### 1.4. 기존 서비스 대비 차별성
-> 위 내용을 작성하세요.
+*(README에 이미지 삽입 예정)*
 
-#### 1.5. 사회적가치 도입 계획
-> 위 내용을 작성하세요.
+### 2.2. 사용 기술
+- **Frontend**: React 18, Tailwind CSS 3  
+- **Backend**(예정): Node.js v20.0.2, Express  
+- **Data**: Excel/CSV 문제은행, JSON 응답 데이터  
+- **Version Control**: Git, GitHub  
+- **Deployment**(예정): Vercel or Netlify  
+- **TTS**(예정): Google Cloud TTS / Naver Clova / OpenAI TTS
 
+---
 
-### 2. 상세설계
-#### 2.1. 시스템 구성도
-> 시스템 구성도(infra, front, back등의 node 간의 관계)의 사진을 삽입하세요.
+## 3. 개발결과
 
-#### 2.1. 사용 기술
-> 스택 별(backend, frontend, designer등) 사용한 기술 및 버전을 작성하세요.
-> 
-> ex) React.Js - React14, Node.js - v20.0.2
+### 3.1. 전체시스템 흐름도
+1. 홈 화면 → "모의고사 시작하기" 클릭  
+2. 설문조사 페이지에서 4파트 설문 완료  
+3. 설문 결과 기반 문제 추출 알고리즘 실행(엑셀 문제은행에서 15문제 선택)  
+4. 녹음 페이지에서 순차적으로 문제 표시, 자동 음성 재생, 제한 시간 녹음  
+5. 녹음 종료 후 다음 문제로 이동  
+6. 모든 문제 종료 후 결과 페이지(향후 기능)로 이동
 
-### 3. 개발결과
-#### 3.1. 전체시스템 흐름도
-> 위 내용을 작성하세요.
+### 3.2. 기능설명
+**홈 페이지**  
+- "모의고사 시작하기" 버튼 클릭 시 설문 페이지로 이동  
 
-#### 3.2. 기능설명
-> 각 페이지 마다 사용자의 입력의 종류와 입력에 따른 결과 설명 및 시연 영상.
-> 
-> ex. 로그인 페이지:
-> 
-> - 이메일 주소와 비밀번호를 입력하면 입력창에서 유효성 검사가 진행됩니다.
-> 
-> - 요효성 검사를 통과하지 못한 경우, 각 경고 문구가 입력창 하단에 표시됩니다.
->   
-> - 유효성 검사를 통과한 경우, 로그인 버튼이 활성화 됩니다.
->   
-> - 로그인 버튼을 클릭 시, 입력한 이메일 주소와 비밀번호에 대한 계정이 있는지 확인합니다.
->   
-> - 계정이 없는 경우, 경고문구가 나타납니다.
->
-> (영상)
+**설문조사 페이지**  
+- 4파트 구성, 일부 다중 선택 가능  
+- 모든 질문 응답 후 "다음" 클릭 시 요약 페이지로 이동  
 
-#### 3.3. 기능명세서
-> 개발한 제품에 대한 기능명세서를 작성해 제출하세요.
-> 
-> 노션 링크, 한글 문서, pdf 파일, 구글 스프레드 시트 등...
+**요약 페이지**  
+- 선택한 설문 응답 확인 가능  
+- "모의고사 시작" 클릭 시 문제 추출 및 녹음 페이지로 이동  
 
-#### 3.4. 디렉토리 구조
-> 위 레포지토리의 디렉토리 구조를 설명하세요.
+**녹음 페이지**  
+- 문제 이미지 및 질문 표시  
+- 자동 음성 재생(향후 TTS 적용)  
+- 준비 시간 30초 후 자동 녹음 시작, 1분 후 자동 종료  
+- 사용자가 수동 종료 가능, "다음" 버튼 클릭 시 다음 문제로 이동
 
-### 4. 설치 및 사용 방법
-> 제품을 설치하기 위헤 필요한 소프트웨어 및 설치 방법을 작성하세요.
->
-> 제품을 설치하고 난 후, 실행 할 수 있는 방법을 작성하세요.
+### 3.3. 기능명세서
+(노션 또는 구글 스프레드시트 링크 삽입)  
+예: https://docs.google.com/spreadsheets/d/...
 
-### 5. 소개 및 시연 영상
-> 프로젝트에 대한 소개와 시연 영상을 넣으세요.
-> 프로젝트 소개 동영상을 교육원 메일(swedu@pusan.ac.kr)로 제출 이후 센터에서 부여받은 youtube URL주소를 넣으세요.
+### 3.4. 디렉토리 구조
+src
+├── api
+├── assets
+├── components
+├── constants
+├── data
+├── hooks
+├── pages
+│ ├── Home.jsx
+│ ├── survey
+│ │ ├── Questions.jsx
+│ │ ├── Summary.jsx
+│ ├── mocktest
+│ │ ├── Recording.jsx
+├── utils
 
-### 6. 팀 소개
-> 팀원 소개 & 구성원 별 역할 분담 & 간단한 연락처를 작성하세요.
+yaml
+복사
 
-### 7. 해커톤 참여 후기
-> 팀원 별 해커톤 참여 후기를 작성하세요.
-```
-<br/>
+---
 
+## 4. 설치 및 사용 방법
 
-## 4. README.md 작성 팁
-- 마크다운 언어를 이용해 README.md 파일을 작성할 때 참고할 수 있는 마크다운 언어 문법을 공유합니다.
-- 다양한 예제와 보다 자세한 문법은 [이 문서](https://www.markdownguide.org/basic-syntax/)를 참고하세요.
+### 설치
+```bash
+# 저장소 클론
+git clone <repo_url>
+cd <repo_name>
 
-### 4.1. 헤더 Header
-```
-# This is a Header 1
-## This is a Header 2
-### This is a Header 3
-#### This is a Header 4
-##### This is a Header 5
-###### This is a Header 6
-####### This is a Header 7 은 지원되지 않습니다.
-```
+# 패키지 설치
+npm install
 
-# This is a Header 1
-## This is a Header 2
-### This is a Header 3
-#### This is a Header 4
-##### This is a Header 5
-###### This is a Header 6
-####### This is a Header 7 은 지원되지 않습니다.
-<br />
+# 개발 서버 실행
+npm run dev
+사용 방법
+브라우저에서 http://localhost:5173 접속
 
-### 4.2. 인용문 BlockQuote
-```
-> This is a first blockqute.
->	> This is a second blockqute.
->	>	> This is a third blockqute.
-```
-> This is a first blockqute.
->	> This is a second blockqute.
->	>	> This is a third blockqute.
-<br />
+홈 화면에서 "모의고사 시작하기" 클릭
 
-### 4.3. 목록 List
-* **Ordered List**
-```
-1. first
-2. second
-3. third  
-```
-1. first
-2. second
-3. third
-<br />
+설문조사 → 요약 → 모의고사 진행
 
-* **Unordered List**
-```
-* 하나
-  * 둘
+5. 소개 및 시연 영상
+(센터에서 부여받은 YouTube URL 삽입 예정)
 
-+ 하나
-  + 둘
+6. 팀 소개
+이명현: 프론트엔드 개발, 설문/녹음 페이지 구현, 프로젝트 총괄
 
-- 하나
-  - 둘
-```
-* 하나
-  * 둘
+하석현 : 문제 추출 알고리즘 개발, 데이터 정리
 
-+ 하나
-  + 둘
+정혜린 : 문제은행 제작, TTS 연동 연구
+백원재: 서버 관리 및, 데이터 정리
+연락처: opic.team@example.com
 
-- 하나
-  - 둘
-<br />
+7. 해커톤 참여 후기
+이명현: 아이디어를 구체적으로 구현하는 과정에서 UI/UX 설계의 중요성을 느꼈다. 실제 시험과 유사한 환경을 만드는 것이 쉽지 않았지만, 완성 후 뿌듯함을 느낀다.
 
-### 4.4. 코드 CodeBlock
-* 코드 블럭 이용 '``'
-```
-여러줄 주석 "```" 이용
-"```
-#include <stdio.h>
-int main(void){
-  printf("Hello world!");
-  return 0;
-}
-```"
+정혜린: 데이터 기반 문제 추출 로직을 구현하면서, 설문 데이터를 활용한 맞춤형 콘텐츠 제작의 가능성을 배웠다.
 
-단어 주석 "`" 이용
-"`Hello world`"
+하석현: TTS 기술과 문제은행 구축을 하며, 시험 콘텐츠의 품질과 사용자 경험의 상관관계를 체감했다.
 
-* 큰 따움표(") 없이 사용하세요.
-``` 
-<br />
-
-### 4.5. 링크 Link
-```
-[Title](link)
-[부산대 소프트웨어융합교육원](https://swedu.pusan.ac.kr/swedu/index.do)
-
-<link>
-<https://swedu.pusan.ac.kr>
-``` 
-[부산대 소프트웨어융합교육원](https://swedu.pusan.ac.kr)
-
-<https://swedu.pusan.ac.kr>  
-<br />
-
-### 4.6. 강조 Highlighting
-```
-*single asterisks*
-_single underscores_
-**double asterisks**
-__double underscores__
-~~cancelline~~
-```
-*single asterisks* <br />
-_single underscores_ <br />
-**double asterisks** <br />
-__double underscores__ <br />
-~~cancelline~~  <br />
-<br />
-
-### 4.7. 이미지 Image
-```
-<img src="/path/to/img.jpg" width="600px" title="Title" alt="Alt text"></img>
-![Alt text](/path/to/img.jpg "Optional title")
-```
-<img src="https://github.com/pnuswedu/SW-Hackathon-2024/assets/34933690/be7beb64-490f-4480-b121-f25cde7f2a8d" width="600px" title="부산대학교 소프트웨어융합교육원" alt="부산대학교 소프트웨어융합교육원"></img>
-<br/>
-![부산대학교 소프트웨어융합교육원](https://github.com/pnuswedu/SW-Hackathon-2024/assets/34933690/884154bb-28f6-4498-9f64-a8a878972951, "부산대학교 소프트웨어융합교육원")
-<br/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+백원재: 아쉽게 예선에서 떨어졌지만 그래도 재미있었다.
